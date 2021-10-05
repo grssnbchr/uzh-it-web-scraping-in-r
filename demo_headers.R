@@ -40,7 +40,7 @@ GET(glue::glue('{base_url}/headers'), set_cookies('foo' = 'bar', 'x' = 'y')) %>%
 
 # store a cookie
 cookie <- GET(glue::glue('{base_url}/cookies/set'), 
-               query = list(foo = 'bar')) %>% 
+               query = list(testkey = 'testvalue')) %>% 
   cookies()
 cookie
 # cookies are automatically persisted between requests to the same domain

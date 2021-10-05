@@ -42,6 +42,9 @@ read_html(base_url) %>%
   html_elements('a') %>% 
   html_text(trim=TRUE)
 
+# btw: base R
+html_text(html_elements(read_html(base_url), 'a'), trim = TRUE)
+
 # extract all the links in a h1 element
 read_html(base_url) %>% 
   html_elements('h1') %>% 

@@ -22,6 +22,30 @@ if(!require(jsonlite)) {
 # task: find an arbitrary element of a page
 base_url <- 'https://app.connect.uzh.ch/apps/id/kurse.nsf/veranstaltungen.xsp'
 
+# get all urls of the top navigation
+read_html(base_url) %>% 
+  html_elements('#primarnav a') %>% 
+  html_attr('href')
+
+# remove first with a special pseudo class
+read_html(base_url) %>% 
+  html_elements('#primarnav a:not(.namedanchor)') %>% 
+  html_attr('href')
+
+read_html(base_url) %>% 
+  html_elements('#primarnav a:nth-child(n+2)') %>% 
+  html_attr('href')
+
+# get all urls of the side navigation on the left side
+read_html(base_url) %>% 
+  html_elements('.secnav li a') %>% 
+  html_attr('href')^
+
+# get the urls of all navigation elements
+read_html(base_url) %>% 
+  html_elements('#primarnav a, .secnav li a') %>% 
+  html_attr('href')
+
 # try to extract all course titles
 read_html(base_url) %>% 
   html_elements('.uzh') %>% 
@@ -31,15 +55,5 @@ read_html(base_url) %>%
 read_html(base_url) %>% 
   html_elements('td:nth-child(1) .uzh') %>% 
   html_text()
-
-# get the urls of all navigation elements
-read_html(base_url) %>% 
-  html_elements('#primarnav a, .secnav li a') %>% 
-  html_attr('href')
-
-# get all urls of the side navigation on the left side
-read_html(base_url) %>% 
-  html_elements('.secnav li a') %>% 
-  html_attr('href')
 
 

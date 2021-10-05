@@ -62,7 +62,7 @@ timos_page %>%
   html_elements('a') %>% 
   html_attr('href')
 
-# send a GET request to each of them and store result in txt files
+# send a GET request to each of them and print status code
 timos_page %>% 
   html_elements('p') %>% 
   html_elements('a') %>% 

@@ -36,4 +36,4 @@ read_html(base_url) %>%
 read_html(base_url) %>% 
   html_elements('figure + div h3 > span > span + span') %>% 
   html_text()
-
+# bug: might also select some articles that have an "invisible" figure
