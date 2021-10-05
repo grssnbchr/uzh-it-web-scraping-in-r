@@ -24,16 +24,16 @@ base_url <- 'https://www.tagesanzeiger.ch/'
 
 # return only the headings of articles 
 read_html(base_url) %>% 
-  html_nodes('h3 > span > span:last-child') %>% # span:nth-child(2) doesn't work 
+  html_elements('h3 > span > span:last-child') %>% # span:nth-child(2) doesn't work 
   html_text()
 
 # return only the headings of paid articles 
 read_html(base_url) %>% 
-  html_nodes('h3 > span > span + span') %>%  
+  html_elements('h3 > span > span + span') %>%  
   html_text()
 
 # return only the headings of paid articles that are accompanied with a teaser image
 read_html(base_url) %>% 
-  html_nodes('figure + div h3 > span > span + span') %>% 
+  html_elements('figure + div h3 > span > span + span') %>% 
   html_text()
 

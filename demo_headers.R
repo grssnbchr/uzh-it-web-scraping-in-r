@@ -57,11 +57,11 @@ set_config(
 
 # user agent for some reason does not get applied to read_html...
 read_html(glue::glue('{base_url}/headers')) %>% 
-  html_nodes('p') %>% 
+  html_elements('p') %>% 
   html_text(trim = T)
 
 # workaround: use GET() inside read_html()
 read_html(GET(glue::glue('{base_url}/headers'))) %>% 
-  html_nodes('p') %>% 
+  html_elements('p') %>% 
   html_text(trim = T)
 

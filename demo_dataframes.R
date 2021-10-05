@@ -24,15 +24,15 @@ base_url <- 'https://www.zh.ch/de/gesundheit/coronavirus.html'
 
 # zh is easy
 read_html(base_url) %>% 
-  html_nodes('table') %>% 
+  html_elements('table') %>% 
   html_table()
 
 # task: scrape without html_table()
 read_html(base_url) %>% 
-  html_nodes('table tr') %>% 
+  html_elements('table tr') %>% 
   map_dfr(function(row){
-      return(tibble(key = row %>% html_node('th') %>% html_text(),
-                    value = row %>% html_node('td') %>% html_text()))
+      return(tibble(key = row %>% html_element('th') %>% html_text(),
+                    value = row %>% html_element('td') %>% html_text()))
   })
 
 

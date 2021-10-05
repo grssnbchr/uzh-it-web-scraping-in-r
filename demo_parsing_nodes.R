@@ -44,28 +44,28 @@ timos_page %>%
 
 # get all p nodes
 timos_page %>% 
-  html_nodes('p')
+  html_elements('p')
 
 # get all children of p nodes
 timos_page %>% 
-  html_nodes('p') %>% 
+  html_elements('p') %>% 
   html_children()
 
 # get all a nodes within p nodes
 timos_page %>% 
-  html_nodes('p') %>% 
-  html_nodes('a')
+  html_elements('p') %>% 
+  html_elements('a')
 
 # get their href attribute
 timos_page %>% 
-  html_nodes('p') %>% 
-  html_nodes('a') %>% 
+  html_elements('p') %>% 
+  html_elements('a') %>% 
   html_attr('href')
 
 # send a GET request to each of them and store result in txt files
 timos_page %>% 
-  html_nodes('p') %>% 
-  html_nodes('a') %>% 
+  html_elements('p') %>% 
+  html_elements('a') %>% 
   html_attr('href') %>% 
   walk(function(x){
     print(glue::glue('{x}: {status_code(GET(x))}'))

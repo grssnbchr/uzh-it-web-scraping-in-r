@@ -24,22 +24,22 @@ base_url <- 'https://app.connect.uzh.ch/apps/id/kurse.nsf/veranstaltungen.xsp'
 
 # try to extract all course titles
 read_html(base_url) %>% 
-  html_nodes('.uzh') %>% 
+  html_elements('.uzh') %>% 
   html_text()
 
 # another try with a pseudo class and the descendant combinator
 read_html(base_url) %>% 
-  html_nodes('td:nth-child(1) .uzh') %>% 
+  html_elements('td:nth-child(1) .uzh') %>% 
   html_text()
 
 # get the urls of all navigation elements
 read_html(base_url) %>% 
-  html_nodes('#primarnav a, .secnav li a') %>% 
+  html_elements('#primarnav a, .secnav li a') %>% 
   html_attr('href')
 
 # get all urls of the side navigation on the left side
 read_html(base_url) %>% 
-  html_nodes('.secnav li a') %>% 
+  html_elements('.secnav li a') %>% 
   html_attr('href')
 
 

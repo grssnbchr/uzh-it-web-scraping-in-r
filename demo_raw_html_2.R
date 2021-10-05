@@ -31,5 +31,5 @@ raw_html <- '<html>
 # direct html parsing
 read_html(raw_html) %>% 
   html_children() %>% 
-  html_nodes('p')
+  html_elements('p')
 

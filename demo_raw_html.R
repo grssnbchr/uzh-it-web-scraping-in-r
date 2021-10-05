@@ -39,13 +39,13 @@ read_html(base_url) %>%
 
 # extract all the links on the page
 read_html(base_url) %>% 
-  html_nodes('a') %>% 
+  html_elements('a') %>% 
   html_text(trim=TRUE)
 
 # extract all the links in a h1 element
 read_html(base_url) %>% 
-  html_nodes('h1') %>% 
-  html_nodes('a') %>% 
+  html_elements('h1') %>% 
+  html_elements('a') %>% 
   html_text(trim=TRUE)
 
 # direct html parsing

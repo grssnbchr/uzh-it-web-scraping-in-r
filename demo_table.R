@@ -47,17 +47,17 @@ read_html(html) %>%
 
 # get all cells
 read_html(html) %>% 
-  html_nodes('tr') %>% 
-  html_nodes('td')
+  html_elements('tr') %>% 
+  html_elements('td')
 
 # get all cells of the second row
 read_html(html) %>% 
-  html_nodes('tr') %>% 
+  html_elements('tr') %>% 
   .[2] %>% 
-  html_nodes('td')
+  html_elements('td')
 
 # base r:
-html_nodes(html_nodes(read_html(html), 'tr')[2], 'td')
+html_elements(html_elements(read_html(html), 'tr')[2], 'td')
 
 # reading tables remotely
 read_html('https://www.uzh.ch/cmsssl/en/studies/dates/dates.html') %>% 
