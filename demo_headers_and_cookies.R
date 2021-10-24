@@ -34,7 +34,7 @@ GET(glue::glue('{base_url}/headers'), add_headers('X-Amzn-Trace-Id' = 'Foobar'))
 GET(glue::glue('{base_url}/headers'), user_agent('TOR Browser')) %>% 
   content()
 
-# set a cookie
+# send a cookie
 GET(glue::glue('{base_url}/headers'), set_cookies('foo' = 'bar', 'x' = 'y')) %>% 
   content()
 

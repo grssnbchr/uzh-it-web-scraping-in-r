@@ -19,20 +19,20 @@ if(!require(jsonlite)) {
   require(jsonlite)
 }
 
-# task: extract covid numbers
-base_url <- 'https://www.zh.ch/de/gesundheit/coronavirus.html'
+# screen scraping not possible here:
+base_url <- 'https://httpbin.org'
 
-# zh is easy
-read_html(base_url) %>% 
-  html_elements('table') %>% 
-  html_table()
+# send a raw body without content-type spec
+POST(glue::glue('{base_url}/post'), body = 'hello') %>% 
+  content()
 
-# task: scrape without html_table()
-read_html(base_url) %>% 
-  html_elements('table tr') %>% 
-  map_dfr(function(row){
-      return(tibble(key = row %>% html_element('th') %>% html_text(),
-                    value = row %>% html_element('td') %>% html_text()))
-  })
+# send some json as a string
+POST(glue::glue('{base_url}/post'), body = '{"foo": "bar"}',
+     add_headers('Content-type' = 'application/json')) %>% 
+  content()
 
+# send some json from a list^
+POST(glue::glue('{base_url}/post'), body = list('foo' = 'bar'), encode = 'json',
+     add_headers('Content-type' = 'application/json')) %>% 
+  content()
 
