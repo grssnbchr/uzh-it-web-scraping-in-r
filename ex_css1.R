@@ -19,66 +19,31 @@ if(!require(jsonlite)) {
   require(jsonlite)
 }
 
-# task: find an arbitrary element of a page
-base_url <- 'https://app.connect.uzh.ch/apps/id/kurse.nsf/veranstaltungen.xsp'
+base_url <- 'https://zi-training.zi.uzh.ch/de/page/courseprogramme'
 
+# extract the url of the title
 read_html(base_url) %>% 
-  html_elements('div#primarnav') %>% 
-  html_elements('a') %>% 
-  html_attr('href') %>% 
-  .[-1]
+  html_element('.headernav_title a') %>% 
+  html_attr('href')
 
 # get all urls of the top navigation
 read_html(base_url) %>% 
-  html_elements('#primarnav a') %>% 
+  html_elements('.headernav_elements') %>% 
+  html_elements('a') %>% 
   html_attr('href')
 
-# remove first with a special pseudo class
+# get the urls of both of them
 read_html(base_url) %>% 
-  html_elements('#primarnav a:not(.namedanchor)') %>% 
+  html_elements('.headernav_title a, .headernav_elements a') %>% 
   html_attr('href')
 
+# booked courses
 read_html(base_url) %>% 
-  html_elements('#primarnav a:nth-child(n+2)') %>% 
-  html_attr('href')
-
-# get all urls of the side navigation on the left side
-read_html(base_url) %>% 
-  html_elements('.secnav li a') %>% 
-  html_attr('href')
-
-# get the urls of all navigation elements
-read_html(base_url) %>% 
-  html_elements('#primarnav a, .secnav li a') %>% 
-  html_attr('href')
-
-# without the first anchor resulting in a NA
-read_html(base_url) %>% 
-  html_elements('#primarnav a:not(.namedanchor), .secnav li a') %>% 
-  html_attr('href')
-
-
-read_html(base_url) %>% 
-  html_elements(".contentarea1col") %>% 
-  html_table() %>% 
-  .[[1]] %>% 
-  select(Kurstitel)
-
-
-
-
-# try to extract all course titles
-read_html(base_url) %>% 
-  html_elements('.uzh') %>% 
+  html_elements('#kursList .warning a') %>% 
   html_text()
 
-# another try with a pseudo class and the descendant combinator
+# second title
 read_html(base_url) %>% 
-  html_elements('tr') %>% 
-  html_elements('*:not(:last-child) .uzh') %>% 
+  html_elements('#kursList tr:nth-child(2) a') %>% 
   html_text()
 
-# or
-read_html(base_url) %>% 
-  html_elements('td:nth-child(1) .uzh') %>% 
-  html_text()

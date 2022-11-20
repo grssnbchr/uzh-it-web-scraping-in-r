@@ -41,7 +41,6 @@ html_text(read_html(base_url))
 
 # extract all the links on the page
 read_html(base_url) %>% 
-  html_elements('h3') %>% 
   html_elements('a') %>% 
   html_attr('href')
 
@@ -63,4 +62,4 @@ read_html(base_url) %>%
 
 # direct html parsing
 read_html('<html><body><p>Hello!</p></body></html>')
-
+  
